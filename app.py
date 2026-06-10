@@ -200,9 +200,6 @@ st.markdown("""
     <h1 class="hero-title">The <em>smartest</em> way to read the market.</h1>
     <p class="hero-subtitle">Real-Time Job Market Intelligence Platform &nbsp;·&nbsp; Powered by Adzuna API</p>
 </div>
-    <h1 class="hero-title">HireScope</h1>
-    <p class="hero-subtitle">Real-Time Job Market Intelligence Platform &nbsp;·&nbsp; Powered by Adzuna API</p>
-</div>
 """, unsafe_allow_html=True)
 
 # -----------------------------
@@ -298,11 +295,11 @@ else:
 
         with colA:
             st.markdown("**Top Companies Hiring**")
-            st.bar_chart(df_display["Company"].value_counts().head(10))
+            st.bar_chart(df_display["Company"].value_counts().head(10), color="#89D7B7")
 
         with colB:
             st.markdown("**Top Locations**")
-            st.bar_chart(df_display["Location"].value_counts().head(10))
+            st.bar_chart(df_display["Location"].value_counts().head(10), color="#89D7B7")
 
     # ─────────── TAB 2: SKILLS & SALARY ───────────
     with tab2:
@@ -321,7 +318,7 @@ else:
             colC, colD = st.columns([2, 1])
             with colC:
                 st.markdown("**Most In-Demand Skills**")
-                st.bar_chart(skills_df.set_index("Skill").head(10))
+                st.bar_chart(skills_df.set_index("Skill").head(10), color="#89D7B7")
             with colD:
                 st.markdown("**Skills Distribution**")
                 fig, ax = plt.subplots(figsize=(4, 4))
@@ -349,7 +346,7 @@ else:
             sc1.metric("Average Salary", f"₹{salary_df['salary'].mean():,.0f}")
             sc2.metric("Max Salary", f"₹{salary_df['salary'].max():,.0f}")
             st.markdown("**Salaries by Company**")
-            st.bar_chart(salary_df[["Company", "salary"]].set_index("Company").head(15))
+            st.bar_chart(salary_df[["Company", "salary"]].set_index("Company").head(15), color="#89D7B7")
         else:
             st.info("No salary data available.")
 
