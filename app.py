@@ -295,11 +295,15 @@ else:
 
         with colA:
             st.markdown("**Top Companies Hiring**")
-            st.bar_chart(df_display["Company"].value_counts().head(10), color="#89D7B7")
+            comp_data = df_display["Company"].value_counts().head(10).reset_index()
+            comp_data.columns = ["Company", "Count"]
+            st.bar_chart(comp_data, x="Company", y="Count", color="#89D7B7")
 
         with colB:
             st.markdown("**Top Locations**")
-            st.bar_chart(df_display["Location"].value_counts().head(10), color="#89D7B7")
+            loc_data = df_display["Location"].value_counts().head(10).reset_index()
+            loc_data.columns = ["Location", "Count"]
+            st.bar_chart(loc_data, x="Location", y="Count", color="#89D7B7")
 
     # ─────────── TAB 2: SKILLS & SALARY ───────────
     with tab2:
@@ -318,7 +322,7 @@ else:
             colC, colD = st.columns([2, 1])
             with colC:
                 st.markdown("**Most In-Demand Skills**")
-                st.bar_chart(skills_df.set_index("Skill").head(10), color="#89D7B7")
+                st.bar_chart(skills_df.head(10), x="Skill", y="Count", color="#89D7B7")
             with colD:
                 st.markdown("**Skills Distribution**")
                 fig, ax = plt.subplots(figsize=(4, 4))
@@ -346,7 +350,7 @@ else:
             sc1.metric("Average Salary", f"₹{salary_df['salary'].mean():,.0f}")
             sc2.metric("Max Salary", f"₹{salary_df['salary'].max():,.0f}")
             st.markdown("**Salaries by Company**")
-            st.bar_chart(salary_df[["Company", "salary"]].set_index("Company").head(15), color="#89D7B7")
+            st.bar_chart(salary_df.head(15), x="Company", y="salary", color="#89D7B7")
         else:
             st.info("No salary data available.")
 
